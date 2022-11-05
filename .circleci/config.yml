@@ -19,7 +19,3 @@ jobs:
       - run:
           name: "RunTests"
           command: scripts/test.sh
-workflows:
-  tests-workflow:
-    jobs:
-      - RunTests

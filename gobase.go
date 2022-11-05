@@ -1,12 +1,18 @@
 package gobase
 
-import "github.com/2mikeg/gobase/pkg"
+import (
+	"encoding/json"
 
-func BaseModel(s any) map[string]interface{} {
+	"github.com/2mikeg/gobase/pkg"
+)
+
+func BaseModel(s any) ([]byte, error) {
 
 	structFields := pkg.StructChecker(s)
 	envVariablesAsMap := pkg.GetEnvVar(structFields)
 
-	return envVariablesAsMap
+	b, err := json.Marshal(envVariablesAsMap)
+
+	return b, err
 
 }

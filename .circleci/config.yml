@@ -1,0 +1,24 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/go:1.19.2
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - run:
+          name: "InstallDependencies"
+          command: go get ./...
+      - save_cache:
+          key: go-mod-v4-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - run:
+          name: "ChmodTest"
+          command: chmod +x scripts/test.sh
+      - run:
+          name: "RunTests"
+          command: scripts/test.sh

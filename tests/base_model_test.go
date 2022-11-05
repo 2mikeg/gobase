@@ -13,6 +13,7 @@ func TestBaseModel(t *testing.T) {
 		FirstVar  string
 		SecondVar int
 		ThirdVar  *bool
+		FourthVar float64
 	}
 
 	var s S
@@ -22,6 +23,7 @@ func TestBaseModel(t *testing.T) {
 		"FirstVar":  "test",
 		"SecondVar": 1,
 		"ThirdVar":  false,
+		"FourthVar": 3.14,
 	}
 
 	assert.Equal(t, got, expected)

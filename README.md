@@ -11,10 +11,10 @@ Gobase help to read and convert environment variables in its initially declared 
 ### Download and install
 
     go get github.com/2mikeg/gobase@latest
-    
+
 ### Features
 You can read enviroment variables written in snakecase even if you write strucs fields as camelcase.
-##### example
+
 ```go
 type Settings struct {
 	ThisVariable *int
@@ -26,20 +26,43 @@ type Settings struct {
 ```go
 type Settings struct {
 	VarOne string
-	VarTwo *int
+	VarTwo *int //Pointers are supported
 }
 
 func main() {
 	var s Settings
 	sBytes, err := gobase.BaseModel(s)
+	//BaseModel return a []byte that must be unmarshal in the struct
 
 	if err != nil {
 		panic(err)
 	}
 
-	json.Unmarshal(sBytes, &s)
+	json.Unmarshal(sBytes, &s) //
 }
 ```
+
+### Types
+| Type       | Support |
+|------------|---------|
+| int8       | Yes     |
+| int16      | Yes     |
+| int32      | Yes     |
+| int64      | Yes     |
+| uint8      | No      |
+| uint16     | No      |
+| uint32     | Yes     |
+| uint64     | Yes     |
+| int        | Yes     |
+| uint       | No      |
+| rune       | Yes     |
+| byte       | No      |
+| uintptr    | No      |
+| string     | Yes     |
+| bool       | Yes     |
+| complex64  | No      |
+| complex128 | No      |
+
 ### Run tests
 
 ```sh

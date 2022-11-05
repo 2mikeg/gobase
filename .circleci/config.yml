@@ -17,5 +17,8 @@ jobs:
           paths:
             - "/go/pkg/mod"
       - run:
+          name: "ChmodTest"
+          command: chmod +x scripts/test.sh
+      - run:
           name: "RunTests"
           command: scripts/test.sh
